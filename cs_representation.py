@@ -199,6 +199,16 @@ def format_cs_output(grammar, cs_rep: CSRepresentation, parse_tree_text: str | N
     lines.append(f"R = {cs_rep.r_regex}")
     lines.append("")
 
+    lines.append("[SECTION Вывод через h]")
+    lines.append("Вывод появляется только после применения h к скобочному слову w ∈ (R ∩ Dyck_Γ).")
+    lines.append("Формально: Output(w) = concat(h(]t)) по всем встреченным ]t, где t ∈ Σ.")
+    lines.append("PRINT = { ]t -> t | t ∈ Σ }")
+    lines.append("Печатающие правила:")
+    for t in sorted(grammar.terminals):
+        lines.append(f"  ]{t} -> {t}")
+    lines.append("Все остальные скобки (включая нетерминалы и ⊥) отображаются в ε.")
+    lines.append("")
+
     lines.append("Расшифровка STEP (локальные шаги PDA):")
     for lhs in sorted(grammar.productions.keys()):
         for rhs in grammar.productions[lhs]:
